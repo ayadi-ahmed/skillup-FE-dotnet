@@ -1,0 +1,126 @@
+<section class="page-header">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="title-block">
+                    <h1>Candidat Registration</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-padding">
+    <div class="container">
+        <form #candidatForm="ngForm">
+            <div class="row m-3">
+                <div class="col-xl-6">
+                    <p><label>First Name&nbsp;<span class="required">*</span></label></p>
+                    <input type="text" class="form-control" name="name" minlength="3"
+                           #name="ngModel"
+                           [class.is-invalid]="name.invalid && name.touched"
+                           [(ngModel)]="candidat.prenom"
+                           required>
+
+                    <div *ngIf="name.errors && name.touched">
+                        <small class="text-danger" *ngIf="name.errors['minlength']">at least 3
+                            characters</small>
+                        <small class="text-danger" *ngIf="name.errors['required']">first name is
+                            required</small>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <p><label>Last Name&nbsp;<span class="required">*</span></label></p>
+                    <input type="text" class="form-control" name="lastName" minlength="3"
+                           #lastName="ngModel"
+                           [class.is-invalid]="lastName.invalid && lastName.touched"
+                           [(ngModel)]="candidat.nom"
+                           required>
+
+                    <div *ngIf="lastName.errors && lastName.touched">
+                        <small class="text-danger" *ngIf="lastName.errors['minlength']">at least 3
+                            characters</small>
+                        <small class="text-danger" *ngIf="lastName.errors['required']">lastName is
+                            required</small>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <p><label>Email&nbsp;<span class="required">*</span></label></p>
+                    <input type="email" class="form-control" name="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"
+                           [class.is-invalid]="email.invalid && email.touched"
+                           [(ngModel)]="candidat.email"
+                           required>
+
+                    <div *ngIf="email.errors && email.touched">
+                        <small class="text-danger" *ngIf="email.errors['required']">email is
+                            required</small>
+                        <small class="text-danger" *ngIf="email.errors['pattern']">invalid
+                            email</small>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <p><label>Phone number&nbsp;<span class="required">*</span></label></p>
+                    <input type="tel" class="form-control" name="tel"
+                           pattern="[- +()0-9]+"
+                           minlength="8"
+                           maxlength="8"
+                           #tel="ngModel"
+                           [class.is-invalid]="tel.invalid && tel.touched"
+                           [(ngModel)]="candidat.tel"
+                           required>
+
+                    <div *ngIf="tel.errors && tel.touched">
+                        <small class="text-danger" *ngIf="tel.errors['required']">phone number is
+                            required</small>
+                        <small class="text-danger"
+                               *ngIf="tel.errors['pattern'] || tel.errors['minlength'] || tel.errors['maxlength']">invalid
+                            phone number</small>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <p><label>Password&nbsp;<span class="required">*</span></label></p>
+                    <input type="password" class="form-control" name="mdp"
+                           minlength="8" #password="ngModel"
+                           [class.is-invalid]="password.invalid && password.touched"
+                           [(ngModel)]="candidat.mdp"
+                           required>
+
+                    <div *ngIf="password.errors && password.touched">
+                        <small class="text-danger" *ngIf="password.errors['required']">password is
+                            required</small>
+                        <small class="text-danger" *ngIf="password.errors['minlength']">at least 8
+                            characters</small>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <p><label>Re-Enter Password&nbsp;<span class="required">*</span></label></p>
+                    <input type="password" class="form-control" name="password2"
+                           #password2="ngModel"
+                           pattern="{{password.value}}"
+                           [class.is-invalid]="password2.invalid && password2.touched"
+                           ngModel
+                           required>
+
+                    <div *ngIf="password2.errors && password2.touched">
+                        <small class="text-danger" *ngIf="password2.errors['required']">password is
+                            required</small>
+                        <small class="text-danger" *ngIf="password2.errors['pattern']">must be the
+                            same of
+                            password</small>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-right">
+                <button class="btn btn-primary" style="background-color: #015abc" type="submit"
+                        (click)="addCandidat()"
+                        [disabled]="name.errors || lastName.errors || email.errors || tel.errors || password.errors || password2.errors"
+                >Done
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
